@@ -93,7 +93,7 @@ export const portfolioData = {
     { name: "Git", level: 85, category: "tools" },
     { name: "Airflow", level: 70, category: "tools" },
     { name: "Figma", level: 80, category: "tools" },
-    { name: "Trello", level: 95, category: "tools" },
+    { name: "Trello", level: 92, category: "tools" },
     { name: "Python", level: 80, category: "other" },
     { name: "SQL", level: 85, category: "other" },
     { name: "Excel", level: 80, category: "other" },
