@@ -69,7 +69,7 @@ export function AboutSection() {
               </h3>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Avec plus de 5 années d'expérience dans le développement web, je me spécialise dans la création
+                  Avec plus de 2 années d'expérience dans le développement web, je me spécialise dans la création
                   d'applications modernes et performantes. Mon expertise couvre l'ensemble de la stack technologique, du
                   front-end au back-end.
                 </p>
