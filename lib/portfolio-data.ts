@@ -53,7 +53,7 @@ export const portfolioData = {
     email: "simembacob@gmail.com",
     phone: "+237 6 50 19 26 42",
     location: "Yaounde, Cameroun",
-    avatar: "/appo.jpg",
+    avatar: "/noel.png",
     resume: "/cv.pdf",
     social: {
       github: "https://github.com/sime65123",
