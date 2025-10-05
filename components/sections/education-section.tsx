@@ -90,7 +90,7 @@ export function EducationSection() {
                 "SQL Intermediate Certification",
                 "JavaScript Advanced",
                 "Meilleur Projet de Fin d'Étude 2024(IUT-FV)",
-                "Figma Design Systems",
+                "Hashgraph Developer Course",
               ].map((cert, index) => (
                 <motion.div
                   key={cert}
