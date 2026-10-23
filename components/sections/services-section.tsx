@@ -1,139 +1,96 @@
 "use client"
-import { motion } from "framer-motion"
-import { Code, Palette, Users, ArrowRight, Check } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { portfolioData } from "@/lib/portfolio-data"
-import Link from "next/link"
 
-const iconMap = {
-  Code,
-  Palette,
-  Users,
-}
+import * as React from "react"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { portfolioData } from "@/lib/portfolio-data"
 
 export function ServicesSection() {
+  const { services, process } = portfolioData
+  const [openId, setOpenId] = React.useState<string | null>(services[0].id)
+
   return (
-    <section id="services" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl font-playfair font-bold text-foreground mb-4">Mes Services</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Je propose des solutions complètes pour donner vie à vos projets digitaux, de la conception au déploiement.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {portfolioData.services.map((service, index) => {
-            const Icon = iconMap[service.icon as keyof typeof iconMap] || Code
-
-            return (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ y: -5 }}
-                className="group"
-              >
-                <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-card">
-                  <CardHeader className="text-center pb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="h-8 w-8 text-primary-foreground" />
-                    </div>
-                    <CardTitle className="text-xl font-playfair group-hover:text-primary transition-colors">
-                      {service.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center">
-                    <p className="text-muted-foreground mb-6 leading-relaxed">{service.description}</p>
-
-                    <ul className="space-y-3 mb-6">
-                      {service.features.map((feature, featureIndex) => (
-                        <motion.li
-                          key={featureIndex}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.4, delay: index * 0.1 + featureIndex * 0.1 }}
-                          className="flex items-center text-sm text-muted-foreground"
-                        >
-                          <Check className="h-4 w-4 text-primary mr-3 flex-shrink-0" />
-                          {feature}
-                        </motion.li>
-                      ))}
-                    </ul>
-
-                    <Button variant="ghost" className="group/btn w-full">
-                      En savoir plus
-                      <ArrowRight className="h-4 w-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )
-          })}
+    <section id="services" className="border-t border-border py-24 lg:py-32">
+      <div className="wrap grid gap-10 lg:grid-cols-12 lg:gap-8">
+        <div className="lg:col-span-3">
+          <h2 className="t-h2">Services</h2>
         </div>
 
-        {/* Process Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center"
-        >
-          <h3 className="text-2xl font-playfair font-bold text-foreground mb-8">Mon processus de travail</h3>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            {[
-              { step: "01", title: "Analyse", description: "Compréhension de vos besoins et objectifs" },
-              { step: "02", title: "Conception", description: "Création des maquettes et prototypes" },
-              { step: "03", title: "Développement", description: "Codage et intégration des fonctionnalités" },
-              { step: "04", title: "Livraison", description: "Tests, déploiement et formation" },
-            ].map((process, index) => (
-              <motion.div
-                key={process.step}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="relative"
-              >
-                <div className="text-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground font-bold">
-                    {process.step}
-                  </div>
-                  <h4 className="font-bold text-foreground mb-2">{process.title}</h4>
-                  <p className="text-sm text-muted-foreground">{process.description}</p>
-                </div>
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-6 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-secondary/30" />
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        <div className="lg:col-span-9">
+          <ul className="border-b border-border">
+            {services.map((service) => {
+              const open = openId === service.id
+              return (
+                <li key={service.id} className="border-t border-border">
+                  <h3>
+                    <button
+                      type="button"
+                      id={`service-${service.id}`}
+                      aria-expanded={open}
+                      aria-controls={`panel-${service.id}`}
+                      onClick={() => setOpenId(open ? null : service.id)}
+                      className="flex w-full items-center justify-between gap-6 py-6 text-left"
+                    >
+                      <span className="t-h3">{service.title}</span>
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "relative block size-5 shrink-0 transition-transform duration-300",
+                          open && "rotate-45",
+                        )}
+                      >
+                        <span className="absolute left-0 top-1/2 h-[2px] w-full -translate-y-1/2 bg-foreground" />
+                        <span className="absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2 bg-foreground" />
+                      </span>
+                    </button>
+                  </h3>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center mt-16"
-        >
-          <p className="text-muted-foreground mb-6">Prêt à démarrer votre projet ?</p>
-          <Button asChild size="lg">
-            <Link href="/contact">Demander un devis gratuit</Link>
-          </Button>
-        </motion.div>
+                  <div
+                    id={`panel-${service.id}`}
+                    role="region"
+                    aria-labelledby={`service-${service.id}`}
+                    className={cn(
+                      "grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none",
+                      open ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                    )}
+                  >
+                    <div className="overflow-hidden" inert={!open}>
+                      <div className="grid gap-8 pb-8 md:grid-cols-2">
+                        <p className="max-w-[30ch] text-lg leading-snug">{service.description}</p>
+                        <ul className="space-y-2">
+                          {service.features.map((feature) => (
+                            <li key={feature} className="border-l-2 border-signal pl-3">
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <Link href="/#contact" className="u-link mb-8 inline-block font-bold">
+                        Parler de ce besoin
+                      </Link>
+                    </div>
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
+
+          {/* Méthode : ici l'ordre compte, donc les étapes sont numérotées. */}
+          <div className="mt-20">
+            <h3 className="t-h3">Comment je travaille</h3>
+            <ol className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {process.map((step, i) => (
+                <li key={step.title} className="border-t-2 border-foreground pt-4">
+                  <span className="block text-4xl font-black leading-none" style={{ fontStretch: "78%" }}>
+                    {i + 1}
+                  </span>
+                  <p className="mt-3 font-bold">{step.title}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{step.description}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
       </div>
     </section>
   )

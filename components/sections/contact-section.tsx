@@ -1,266 +1,164 @@
 "use client"
+
 import * as React from "react"
-import { motion } from "framer-motion"
-import { Mail, Phone, MapPin, Send, Clock, MessageCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
+import { Check, Copy } from "lucide-react"
 import { portfolioData } from "@/lib/portfolio-data"
 
+type Status = "idle" | "sending" | "success" | "error"
+
 export function ContactSection() {
-  const [formData, setFormData] = React.useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = React.useState(false)
-  const [submitStatus, setSubmitStatus] = React.useState<"idle" | "success" | "error">("idle")
+  const { personal } = portfolioData
+  const [status, setStatus] = React.useState<Status>("idle")
+  const [copied, setCopied] = React.useState(false)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
+  const copyEmail = async () => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      setSubmitStatus("success")
-      setFormData({ name: "", email: "", subject: "", message: "" })
-    } catch (error) {
-      setSubmitStatus("error")
-    } finally {
-      setIsSubmitting(false)
+      await navigator.clipboard.writeText(personal.email)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 2000)
+    } catch {
+      window.location.href = `mailto:${personal.email}`
     }
-
-    // Reset status after 3 seconds
-    setTimeout(() => setSubmitStatus("idle"), 3000)
   }
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: portfolioData.personal.email,
-      href: `mailto:${portfolioData.personal.email}`,
-    },
-    {
-      icon: Phone,
-      label: "Téléphone",
-      value: portfolioData.personal.phone,
-      href: `tel:${portfolioData.personal.phone}`,
-    },
-    {
-      icon: MapPin,
-      label: "Localisation",
-      value: portfolioData.personal.location,
-      href: "#",
-    },
-  ]
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const data = new FormData(form)
+    setStatus("sending")
+
+    try {
+      // FormSubmit.co : envoie le message par e-mail, sans serveur à maintenir.
+      const res = await fetch(`https://formsubmit.co/ajax/${personal.email}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          message: data.get("message"),
+          _replyto: data.get("email"),
+          _honey: data.get("_honey"),
+          _subject: "Nouveau message depuis le portfolio",
+          _template: "table",
+          _captcha: "false",
+        }),
+      })
+      const json = await res.json().catch(() => ({}))
+      if (!res.ok || String(json.success) === "false") throw new Error("send failed")
+      form.reset()
+      setStatus("success")
+    } catch {
+      setStatus("error")
+    }
+  }
 
   return (
-    <section id="contact" className="py-20 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl font-playfair font-bold text-foreground mb-4">Contactez-moi</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Vous avez un projet en tête ? N'hésitez pas à me contacter pour en discuter. Je réponds généralement sous
-            24h.
-          </p>
-        </motion.div>
+    <section id="contact" className="bg-finale py-24 text-[#eaf0e6] lg:py-32" style={{ ["--btn-shadow" as string]: "#eaf0e6" }}>
+      <div className="wrap">
+        <h2 className="t-h2 text-signal">Parlons de votre projet</h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
+        <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
+          <a
+            href={`mailto:${personal.email}`}
+            className="u-link break-all text-[clamp(1.5rem,4.2vw,3.5rem)] font-extrabold leading-tight tracking-tight"
+            style={{ fontStretch: "88%" }}
           >
+            {personal.email}
+          </a>
+          <button
+            type="button"
+            onClick={copyEmail}
+            className="inline-flex items-center gap-2 border-2 border-[#eaf0e6]/40 px-3 py-2 text-sm font-semibold transition-colors hover:border-signal hover:text-signal"
+          >
+            {copied ? <Check className="size-4" aria-hidden /> : <Copy className="size-4" aria-hidden />}
+            <span aria-live="polite">{copied ? "Adresse copiée" : "Copier l’adresse"}</span>
+          </button>
+        </div>
+
+        <div className="mt-20 grid gap-16 lg:grid-cols-12 lg:gap-12">
+          <dl className="space-y-6 lg:col-span-4">
             <div>
-              <h3 className="text-xl font-bold text-foreground mb-6">Informations de contact</h3>
-              <div className="space-y-4">
-                {contactInfo.map((info, index) => {
-                  const Icon = info.icon
-                  return (
-                    <motion.div
-                      key={info.label}
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
-                    >
-                      <a
-                        href={info.href}
-                        className="flex items-center space-x-4 p-4 rounded-lg hover:bg-muted/50 transition-colors group"
-                      >
-                        <div className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <Icon className="h-5 w-5 text-primary-foreground" />
-                        </div>
-                        <div>
-                          <p className="text-sm text-muted-foreground">{info.label}</p>
-                          <p className="font-medium text-foreground">{info.value}</p>
-                        </div>
-                      </a>
-                    </motion.div>
-                  )
-                })}
+              <dt className="text-sm text-[#eaf0e6]/60">Téléphone</dt>
+              <dd className="mt-1 text-lg font-semibold">
+                <a href={`tel:${personal.phone.replace(/\s/g, "")}`} className="u-link">
+                  {personal.phone}
+                </a>
+              </dd>
+            </div>
+            <div>
+              <dt className="text-sm text-[#eaf0e6]/60">Localisation</dt>
+              <dd className="mt-1 text-lg font-semibold">{personal.location}</dd>
+            </div>
+            <div>
+              <dt className="text-sm text-[#eaf0e6]/60">En ligne</dt>
+              <dd className="mt-1 flex flex-wrap gap-x-6 gap-y-1 text-lg font-semibold">
+                <a href={personal.social.github} target="_blank" rel="noopener noreferrer" className="u-link">
+                  GitHub
+                </a>
+                <a href={personal.social.linkedin} target="_blank" rel="noopener noreferrer" className="u-link">
+                  LinkedIn
+                </a>
+                <a href={personal.resume} download className="u-link">
+                  CV
+                </a>
+              </dd>
+            </div>
+          </dl>
+
+          <form onSubmit={onSubmit} className="space-y-8 lg:col-span-8" aria-describedby="form-status">
+            <div className="grid gap-8 sm:grid-cols-2">
+              <div>
+                <label htmlFor="name" className="text-sm font-semibold">
+                  Nom
+                </label>
+                <input id="name" name="name" type="text" required autoComplete="name" className="field" />
+              </div>
+              <div>
+                <label htmlFor="email" className="text-sm font-semibold">
+                  Adresse e-mail
+                </label>
+                <input id="email" name="email" type="email" required autoComplete="email" className="field" />
               </div>
             </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Clock className="h-5 w-5 text-primary" />
-                  <span>Disponibilité</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Lun - Ven</span>
-                    <span className="font-medium">9h - 18h</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Sam</span>
-                    <span className="font-medium">10h - 16h</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Dim</span>
-                    <span className="font-medium">Fermé</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <div>
+              <label htmlFor="message" className="text-sm font-semibold">
+                Votre projet
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={5}
+                placeholder="Le besoin, le contexte, le délai souhaité…"
+                className="field resize-y"
+              />
+            </div>
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-3 mb-3">
-                  <MessageCircle className="h-5 w-5 text-primary" />
-                  <span className="font-medium">Réponse rapide</span>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Je m'engage à répondre à tous les messages dans les 24 heures ouvrables.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
+            {/* Piège à robots : invisible pour les humains. */}
+            <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
 
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-2"
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle>Envoyez-moi un message</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">Nom complet *</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        placeholder="Votre nom"
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email *</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="votre@email.com"
-                        required
-                      />
-                    </div>
-                  </div>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+              <button type="submit" disabled={status === "sending"} className="btn-signal">
+                {status === "sending" ? "Envoi en cours" : "Envoyer le message"}
+              </button>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Sujet *</Label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      placeholder="Sujet de votre message"
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message *</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      placeholder="Décrivez votre projet ou votre demande..."
-                      rows={6}
-                      required
-                    />
-                  </div>
-
-                  <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-foreground mr-2" />
-                        Envoi en cours...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="h-4 w-4 mr-2" />
-                        Envoyer le message
-                      </>
-                    )}
-                  </Button>
-
-                  {submitStatus === "success" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-800 dark:text-green-200 text-sm"
-                    >
-                      Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.
-                    </motion.div>
-                  )}
-
-                  {submitStatus === "error" && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-800 dark:text-red-200 text-sm"
-                    >
-                      Une erreur s'est produite. Veuillez réessayer ou me contacter directement par email.
-                    </motion.div>
-                  )}
-                </form>
-              </CardContent>
-            </Card>
-          </motion.div>
+              <p id="form-status" role="status" className="text-sm font-semibold">
+                {status === "success" && (
+                  <span className="text-signal">Message envoyé. Je vous réponds par e-mail.</span>
+                )}
+                {status === "error" && (
+                  <span>
+                    Le message n’a pas pu partir. Écrivez-moi directement à{" "}
+                    <a href={`mailto:${personal.email}`} className="u-link">
+                      {personal.email}
+                    </a>
+                    .
+                  </span>
+                )}
+              </p>
+            </div>
+          </form>
         </div>
       </div>
     </section>

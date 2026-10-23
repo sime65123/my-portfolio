@@ -3,81 +3,105 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Updated color palette to match design brief with blue/turquoise theme */
+/*
+  Palette tirée du terrain : béton de la station, vert de la bâche,
+  jaune signal, rouge de barrière, vert encre pour le texte.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #111827;
-  --card: #f8fafc;
-  --card-foreground: #111827;
-  --popover: #ffffff;
-  --popover-foreground: #111827;
-  --primary: #1e3a8a;
+  --ink: #0f2e22;
+  --signal: #f5b921;
+  --barrier: #c8372d;
+  --awning: #1b6b45;
+  --finale: #0f2e22;
+
+  --background: #e4e6e0;
+  --foreground: #0f2e22;
+  --card: #edefe9;
+  --card-foreground: #0f2e22;
+  --popover: #edefe9;
+  --popover-foreground: #0f2e22;
+  --primary: #1b6b45;
   --primary-foreground: #ffffff;
-  --secondary: #06b6d4;
-  --secondary-foreground: #ffffff;
-  --muted: #f8fafc;
-  --muted-foreground: #6b7280;
-  --accent: #06b6d4;
-  --accent-foreground: #ffffff;
-  --destructive: #dc2626;
+  --secondary: #d4d8d0;
+  --secondary-foreground: #0f2e22;
+  --muted: #d4d8d0;
+  --muted-foreground: #4b6055;
+  --accent: #f5b921;
+  --accent-foreground: #0f2e22;
+  --destructive: #c8372d;
   --destructive-foreground: #ffffff;
-  --border: #e5e7eb;
-  --input: #f8fafc;
-  --ring: #06b6d4;
-  --chart-1: #1e3a8a;
-  --chart-2: #06b6d4;
-  --chart-3: #dc2626;
-  --chart-4: #f59e0b;
-  --chart-5: #10b981;
-  --radius: 0.5rem;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #111827;
-  --sidebar-primary: #1e3a8a;
+  --border: rgb(15 46 34 / 0.2);
+  --input: rgb(15 46 34 / 0.3);
+  --ring: #1b6b45;
+  --focus: #1b6b45;
+  --btn-shadow: #0f2e22;
+
+  --chart-1: #1b6b45;
+  --chart-2: #f5b921;
+  --chart-3: #c8372d;
+  --chart-4: #0f2e22;
+  --chart-5: #4b6055;
+
+  --radius: 2px;
+
+  --sidebar: #edefe9;
+  --sidebar-foreground: #0f2e22;
+  --sidebar-primary: #1b6b45;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #06b6d4;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #e5e7eb;
-  --sidebar-ring: #06b6d4;
+  --sidebar-accent: #d4d8d0;
+  --sidebar-accent-foreground: #0f2e22;
+  --sidebar-border: rgb(15 46 34 / 0.2);
+  --sidebar-ring: #1b6b45;
 }
 
 .dark {
-  --background: #0f172a;
-  --foreground: #f1f5f9;
-  --card: #1e293b;
-  --card-foreground: #f1f5f9;
-  --popover: #1e293b;
-  --popover-foreground: #f1f5f9;
-  --primary: #3b82f6;
-  --primary-foreground: #ffffff;
-  --secondary: #0891b2;
-  --secondary-foreground: #ffffff;
-  --muted: #334155;
-  --muted-foreground: #94a3b8;
-  --accent: #0891b2;
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #334155;
-  --input: #334155;
-  --ring: #0891b2;
-  --chart-1: #3b82f6;
-  --chart-2: #0891b2;
-  --chart-3: #ef4444;
-  --chart-4: #f59e0b;
-  --chart-5: #10b981;
-  --sidebar: #1e293b;
-  --sidebar-foreground: #f1f5f9;
-  --sidebar-primary: #3b82f6;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #0891b2;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #334155;
-  --sidebar-ring: #0891b2;
+  --background: #0a1a13;
+  --foreground: #e6ebe3;
+  --card: #10261c;
+  --card-foreground: #e6ebe3;
+  --popover: #10261c;
+  --popover-foreground: #e6ebe3;
+  --primary: #52c08a;
+  --primary-foreground: #06150e;
+  --secondary: #16342a;
+  --secondary-foreground: #e6ebe3;
+  --muted: #16342a;
+  --muted-foreground: #9fb4a8;
+  --accent: #f5b921;
+  --accent-foreground: #0f2e22;
+  --destructive: #ef6a5f;
+  --destructive-foreground: #0a1a13;
+  --border: rgb(230 235 227 / 0.18);
+  --input: rgb(230 235 227 / 0.3);
+  --ring: #52c08a;
+  --focus: #f5b921;
+  --btn-shadow: #e6ebe3;
+
+  --chart-1: #52c08a;
+  --chart-2: #f5b921;
+  --chart-3: #ef6a5f;
+  --chart-4: #e6ebe3;
+  --chart-5: #9fb4a8;
+
+  --sidebar: #10261c;
+  --sidebar-foreground: #e6ebe3;
+  --sidebar-primary: #52c08a;
+  --sidebar-primary-foreground: #06150e;
+  --sidebar-accent: #16342a;
+  --sidebar-accent-foreground: #e6ebe3;
+  --sidebar-border: rgb(230 235 227 / 0.18);
+  --sidebar-ring: #52c08a;
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: var(--ink);
+  --color-signal: var(--signal);
+  --color-barrier: var(--barrier);
+  --color-awning: var(--awning);
+  --color-finale: var(--finale);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -102,10 +126,6 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -114,63 +134,319 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: 1px;
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) * 2);
+  --radius-xl: calc(var(--radius) * 4);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
+
+  html {
+    scroll-padding-top: 5.5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   body {
     @apply bg-background text-foreground;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  ::selection {
+    background: var(--signal);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
   }
 }
 
-/* Added smooth scrolling and custom animations */
-html {
-  scroll-behavior: smooth;
+/* ------------------------------------------------------------------ */
+/* Composants de mise en page et de typographie                        */
+/* ------------------------------------------------------------------ */
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .wrap {
+      padding-inline: 3rem;
+    }
+  }
+
+  /* Le nom : très gras, sa largeur s'anime à l'ouverture. */
+  .t-display {
+    font-weight: 900;
+    line-height: 0.86;
+    letter-spacing: -0.025em;
+    font-size: clamp(3.4rem, 16vw, 6.5rem);
+  }
+  @media (min-width: 1024px) {
+    .t-display {
+      font-size: clamp(5.5rem, 10.6vw, 10rem);
+    }
+  }
+
+  /* Titres de section : condensés, serrés. */
+  .t-h2 {
+    font-weight: 800;
+    font-stretch: 78%;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    font-size: clamp(2.75rem, 5.6vw, 5rem);
+  }
+
+  .t-h3 {
+    font-weight: 800;
+    font-stretch: 85%;
+    line-height: 1;
+    letter-spacing: -0.005em;
+    font-size: clamp(1.6rem, 2.6vw, 2.25rem);
+  }
+
+  .t-lead {
+    font-weight: 500;
+    line-height: 1.4;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+  }
+
+  .t-statement {
+    font-weight: 500;
+    line-height: 1.22;
+    letter-spacing: -0.012em;
+    font-size: clamp(1.55rem, 2.9vw, 2.55rem);
+  }
+
+  /* Bande de barrière : rouge et blanc, utilisée trois fois, jamais en décor gratuit. */
+  .stripes {
+    background: repeating-linear-gradient(135deg, var(--barrier) 0 9px, #f4f4ef 9px 18px);
+  }
+
+  .u-link {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    transition: text-decoration-color 0.2s, color 0.2s;
+  }
+  .u-link:hover {
+    text-decoration-color: var(--signal);
+  }
+
+  /* Bouton principal : jaune signal, ombre franche qui s'écrase au clic. */
+  .btn-signal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--signal);
+    color: var(--ink);
+    font-weight: 700;
+    padding: 0.9rem 1.5rem;
+    border-radius: 2px;
+    box-shadow: 4px 4px 0 0 var(--btn-shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-signal:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 var(--btn-shadow);
+  }
+  .btn-signal:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 0 var(--btn-shadow);
+  }
+  .btn-signal:disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /* Index des projets : la ligne active se remplit de jaune (bureau seulement). */
+  .proj-fill {
+    transform: scaleX(0);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .proj-title {
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @media (min-width: 1024px) {
+    .proj-row[data-active="true"] .proj-fill {
+      transform: scaleX(1);
+    }
+    .proj-row[data-active="true"] .proj-text {
+      color: var(--ink);
+    }
+    .proj-row[data-active="true"] .proj-title {
+      transform: translateX(0.75rem);
+    }
+  }
+
+  /* Champs du formulaire : un simple trait, pas de boîte. */
+  .field {
+    width: 100%;
+    background: transparent;
+    color: inherit;
+    border: 0;
+    border-bottom: 2px solid rgb(255 255 255 / 0.35);
+    padding: 0.6rem 0 0.7rem;
+    border-radius: 0;
+    transition: border-color 0.2s;
+  }
+  .field::placeholder {
+    color: rgb(255 255 255 / 0.4);
+  }
+  .field:focus {
+    outline: none;
+    border-bottom-color: var(--signal);
+  }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
+/* ------------------------------------------------------------------ */
+/* Ouverture : un ticket est validé, la barrière se lève               */
+/* Tout est en CSS pour démarrer avant même l'hydratation de React.    */
+/* ------------------------------------------------------------------ */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  animation: intro-out 0.7s cubic-bezier(0.7, 0, 0.2, 1) 1.8s forwards;
+}
+@keyframes intro-out {
+  0% {
     transform: translateY(0);
+    visibility: visible;
+  }
+  99% {
+    transform: translateY(-100%);
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(-100%);
+    visibility: hidden;
   }
 }
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
+.gate-pole {
+  transform-origin: 0 50%;
+  animation: gate-lift 0.95s cubic-bezier(0.55, 0, 0.25, 1) 0.85s forwards;
+}
+@keyframes gate-lift {
+  to {
+    transform: rotate(-72deg);
   }
+}
+.gate-led {
+  background: var(--barrier);
+  box-shadow: 0 0 0 4px rgb(200 55 45 / 0.25), 0 0 18px rgb(200 55 45 / 0.7);
+  animation: gate-led 0.25s linear 0.55s forwards;
+}
+@keyframes gate-led {
+  to {
+    background: #3ddc84;
+    box-shadow: 0 0 0 4px rgb(61 220 132 / 0.25), 0 0 18px rgb(61 220 132 / 0.7);
+  }
+}
+.gate-text-a {
+  animation: gate-fade-out 0.2s linear 0.55s forwards;
+}
+.gate-text-b {
+  opacity: 0;
+  animation: gate-fade-in 0.2s linear 0.6s forwards;
+}
+@keyframes gate-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes gate-fade-in {
   to {
     opacity: 1;
-    transform: translateX(0);
   }
 }
 
-@keyframes slideInRight {
+/* Si l'ouverture a déjà été vue dans cette session, on l'ignore (script dans <head>). */
+.intro-skip #intro {
+  display: none;
+}
+
+/* Le nom s'élargit une fois la barrière levée. */
+@keyframes name-expand {
   from {
-    opacity: 0;
-    transform: translateX(30px);
+    font-stretch: 62%;
   }
   to {
-    opacity: 1;
-    transform: translateX(0);
+    font-stretch: 112%;
   }
 }
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
+.hero-name {
+  font-stretch: 112%;
+  animation: name-expand 1.25s cubic-bezier(0.2, 0.75, 0.2, 1) 1.55s both;
+}
+.intro-skip .hero-name {
+  animation-delay: 0.1s;
 }
 
-.animate-slide-in-left {
-  animation: slideInLeft 0.6s ease-out;
+/* Le badge se balance au bout de sa sangle, une seule fois. */
+@keyframes badge-swing {
+  0% {
+    transform: rotate(9deg);
+  }
+  22% {
+    transform: rotate(-6deg);
+  }
+  44% {
+    transform: rotate(3.5deg);
+  }
+  64% {
+    transform: rotate(-2deg);
+  }
+  82% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+.badge-swing {
+  transform-origin: 50% 0;
+  animation: badge-swing 2.6s ease-in-out 1.75s both;
+}
+.intro-skip .badge-swing {
+  animation-delay: 0.15s;
 }
 
-.animate-slide-in-right {
-  animation: slideInRight 0.6s ease-out;
+@media (prefers-reduced-motion: reduce) {
+  #intro {
+    display: none;
+  }
+  .hero-name,
+  .badge-swing {
+    animation: none;
+  }
+  .proj-fill,
+  .proj-title,
+  .btn-signal {
+    transition: none;
+  }
 }
