@@ -1,35 +1,25 @@
 "use client"
 
 import * as React from "react"
-import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
-import { Button } from "@/components/ui/button"
+import { Moon, Sun } from "lucide-react"
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
 
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
+  React.useEffect(() => setMounted(true), [])
 
-  if (!mounted) {
-    return (
-      <Button variant="ghost" size="icon" className="w-9 h-9">
-        <Sun className="h-4 w-4" />
-      </Button>
-    )
-  }
+  const dark = mounted && resolvedTheme === "dark"
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="w-9 h-9 hover:bg-accent/10 transition-colors"
+    <button
+      type="button"
+      onClick={() => setTheme(dark ? "light" : "dark")}
+      aria-label={dark ? "Passer au thème clair" : "Passer au thème sombre"}
+      className="grid size-10 place-items-center rounded-[2px] transition-colors hover:bg-foreground/10"
     >
-      {theme === "light" ? <Moon className="h-4 w-4 transition-all" /> : <Sun className="h-4 w-4 transition-all" />}
-      <span className="sr-only">Basculer le thème</span>
-    </Button>
+      {dark ? <Sun className="size-5" aria-hidden /> : <Moon className="size-5" aria-hidden />}
+    </button>
   )
 }
