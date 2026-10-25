@@ -2,11 +2,13 @@
 
 import * as React from "react"
 
+const nodes = ["Terrain", "Serveur", "Données", "Écran"]
+
 /**
- * Ouverture du site : un ticket est validé, la barrière se lève, le rideau monte.
+ * Ouverture du site : la chaîne « du capteur à l'écran » se met en route,
+ * nœud après nœud, puis le rideau s'ouvre en deux.
  * L'animation est en CSS (voir globals.css) pour démarrer sans attendre React.
- * Ce composant ne fait que retirer le calque une fois l'animation terminée
- * et mémoriser, pour la session, qu'elle a été vue.
+ * Ce composant retire le calque à la fin et mémorise que l'ouverture a été vue.
  */
 export function IntroGate() {
   const [done, setDone] = React.useState(false)
@@ -22,32 +24,59 @@ export function IntroGate() {
         sessionStorage.setItem("intro", "1")
       } catch {}
       setDone(true)
-    }, 2600)
+    }, 2850)
     return () => window.clearTimeout(timer)
   }, [])
 
   if (done) return null
 
   return (
-    <div id="intro" aria-hidden="true">
-      <div className="flex w-full max-w-[36rem] flex-col items-center px-6">
-        {/* Portique : poteau à gauche, lisse rouge et blanc qui pivote, appui à droite. */}
-        <div className="relative h-40 w-full">
-          <div className="absolute bottom-0 left-0 h-32 w-14 rounded-[3px] bg-signal">
-            <div className="absolute inset-x-2.5 top-3 grid h-9 place-items-center rounded-[2px] bg-ink">
-              <span className="gate-led block size-3.5 rounded-full" />
-            </div>
-          </div>
-          <div
-            className="gate-pole stripes absolute top-[34px] h-[18px] rounded-[2px]"
-            style={{ left: "3.25rem", right: "1.25rem" }}
-          />
-          <div className="absolute bottom-0 right-0 h-16 w-4 rounded-[2px] bg-[#9aa89f]" />
-        </div>
+    <div id="intro" className="on-navy" aria-hidden="true">
+      <div className="intro-half intro-top" />
+      <div className="intro-half intro-bottom" />
 
-        <div className="relative mt-10 h-6 w-full text-center text-sm font-semibold text-[#e6ebe3]">
-          <span className="gate-text-a absolute inset-x-0">Vérification du ticket</span>
-          <span className="gate-text-b absolute inset-x-0 text-signal">Ticket valide</span>
+      <div className="intro-content">
+        <div className="w-full max-w-[34rem]">
+          <p className="intro-name">Sime Mbacob</p>
+          <p className="intro-sub label mt-3 text-[#96a2ba]">Développeur full-stack · data</p>
+
+          {/* La chaîne : chaque nœud s'allume quand le trait qui le précède est tracé. */}
+          <div className="mt-12 flex items-center" role="presentation">
+            {nodes.map((name, i) => (
+              <React.Fragment key={name}>
+                <div className="relative flex flex-col items-center">
+                  <span
+                    className="intro-node block"
+                    style={{ "--nd": `${0.55 + i * 0.3}s` } as React.CSSProperties}
+                  />
+                  <span
+                    className="intro-node-label label absolute top-6 whitespace-nowrap text-[#96a2ba]"
+                    style={{ "--nd": `${0.55 + i * 0.3}s` } as React.CSSProperties}
+                  >
+                    {name}
+                  </span>
+                </div>
+                {i < nodes.length - 1 && (
+                  <span
+                    className="intro-line mx-1 flex-1"
+                    style={{ "--ld": `${0.58 + i * 0.3}s` } as React.CSSProperties}
+                  />
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+
+          <div className="mt-16 space-y-1 font-mono text-[0.8125rem] leading-6 text-[#c3cde0]">
+            <p className="intro-log" style={{ "--ld": "0.7s" } as React.CSSProperties}>
+              › Ticket présenté
+            </p>
+            <p className="intro-log" style={{ "--ld": "1.1s" } as React.CSSProperties}>
+              › Vérification par le serveur local
+            </p>
+            <p className="intro-log text-[#b0f1cd]" style={{ "--ld": "1.5s" } as React.CSSProperties}>
+              › Accès accordé
+            </p>
+          </div>
         </div>
       </div>
     </div>

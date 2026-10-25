@@ -1,24 +1,58 @@
+import Link from "next/link"
+import { ArrowUpRight, Download } from "lucide-react"
+import { Reveal } from "@/components/reveal"
 import { portfolioData } from "@/lib/portfolio-data"
 
 export function AboutSection() {
-  const { about } = portfolioData
+  const { about, personal } = portfolioData
 
   return (
-    <section id="profil" className="border-t border-border py-24 lg:py-32">
-      <div className="wrap grid gap-10 lg:grid-cols-12 lg:gap-8">
-        <h2 className="t-h2 lg:col-span-3">Profil</h2>
+    <section id="a-propos" className="section border-b border-line bg-surface-low">
+      <div className="wrap grid gap-10 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-4">
+          <p className="label text-brand">À propos</p>
+          <Reveal as="h2" variant="mask" className="t-h2 mt-3">
+            Je construis de la donnée au capteur
+          </Reveal>
+        </div>
 
-        <div className="lg:col-span-9">
-          <p className="t-statement max-w-[34em]">{about.statement}</p>
+        <div className="lg:col-span-8">
+          <Reveal className="space-y-5">
+            <p className="t-title max-w-[40rem] text-ink">{about.paragraphs[0]}</p>
+            <p className="max-w-[40rem] text-ink-soft">{about.paragraphs[1]}</p>
+          </Reveal>
 
-          <dl className="mt-16 grid gap-x-12 sm:grid-cols-2">
-            {about.facts.map((fact) => (
-              <div key={fact.label} className="grid grid-cols-[7.5rem_1fr] gap-4 border-t border-border py-4">
-                <dt className="text-muted-foreground">{fact.label}</dt>
-                <dd className="font-semibold">{fact.value}</dd>
-              </div>
+          <Reveal className="mt-8">
+            <a href={personal.resume} download className="btn btn-primary">
+              <Download className="size-4" aria-hidden />
+              Télécharger mon CV
+            </a>
+          </Reveal>
+
+          <ul className="mt-14 grid border-t border-line sm:grid-cols-3">
+            {about.focus.map((item, i) => (
+              <li key={item.title} className="border-b border-line sm:border-b-0 sm:[&:not(:first-child)]:border-l">
+                <Reveal delay={i * 0.08} className="h-full">
+                  <Link
+                    href={`/projects/${item.project}`}
+                    className="group flex h-full flex-col justify-between gap-6 p-5 transition-colors hover:bg-surface-mid"
+                  >
+                    <div>
+                      <h3 className="t-h3">{item.title}</h3>
+                      <p className="mt-2 text-ink-soft">{item.text}</p>
+                    </div>
+                    <span className="label flex items-center gap-1.5 text-brand">
+                      Voir le projet
+                      <ArrowUpRight
+                        className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                        aria-hidden
+                      />
+                    </span>
+                  </Link>
+                </Reveal>
+              </li>
             ))}
-          </dl>
+          </ul>
         </div>
       </div>
     </section>

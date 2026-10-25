@@ -1,46 +1,51 @@
+import { Reveal } from "@/components/reveal"
 import { portfolioData } from "@/lib/portfolio-data"
 
 export function JourneySection() {
   const { education, distinction, certifications } = portfolioData
 
   return (
-    <section id="parcours" className="border-t border-border py-24 lg:py-32">
-      <div className="wrap grid gap-10 lg:grid-cols-12 lg:gap-8">
-        <h2 className="t-h2 lg:col-span-3">Parcours</h2>
+    <section id="parcours" className="section border-b border-line bg-surface-low">
+      <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-12">
+        <div className="lg:col-span-4">
+          <p className="label text-brand">Parcours</p>
+          <Reveal as="h2" variant="mask" className="t-h2 mt-3">
+            Formation et distinctions
+          </Reveal>
+        </div>
 
-        <div className="lg:col-span-9">
-          {/* Formation : du plus récent au plus ancien. */}
-          <ol className="border-b border-border">
-            {education.map((item) => (
-              <li key={item.id} className="grid gap-3 border-t border-border py-8 lg:grid-cols-[15rem_1fr] lg:gap-10">
-                <p
-                  className="flex items-center gap-2.5 text-2xl font-black leading-none"
-                  style={{ fontStretch: "78%" }}
-                >
-                  {item.current && <span aria-hidden className="block size-3 bg-signal" />}
-                  {item.period}
-                </p>
-                <div>
-                  <h3 className="text-xl font-bold leading-snug">{item.degree}</h3>
-                  <p className="mt-1 font-semibold text-primary">
-                    {item.institution}, {item.location}
+        <div className="lg:col-span-8">
+          <ol className="border-t border-line">
+            {education.map((item, i) => (
+              <li key={item.id} className="border-b border-line">
+                <Reveal delay={i * 0.06} className="grid gap-1 py-6 sm:grid-cols-[9rem_1fr] sm:gap-6">
+                  <p className="label flex items-center gap-2 pt-1 text-ink-faint">
+                    {item.current && <span aria-hidden className="pulse-dot" />}
+                    <span className={item.current ? "text-brand" : undefined}>{item.period}</span>
                   </p>
-                  <p className="mt-2 max-w-[44ch] text-muted-foreground">{item.description}</p>
-                </div>
+                  <div>
+                    <h3 className="t-h3">{item.degree}</h3>
+                    <p className="mt-1 text-ink-soft">
+                      {item.institution}, {item.location}
+                    </p>
+                    <p className="mt-2 text-[0.9375rem] text-ink-soft">{item.description}</p>
+                  </div>
+                </Reveal>
               </li>
             ))}
           </ol>
 
-          <div className="mt-16 grid gap-3 lg:grid-cols-[15rem_1fr] lg:gap-10">
-            <h3 className="t-h3">Certifications</h3>
-            <ul className="border-b border-border">
-              <li className="flex items-start gap-3 border-t border-border py-4 font-bold">
-                <span aria-hidden className="mt-2 block size-2.5 shrink-0 bg-signal" />
-                {distinction}
-              </li>
-              {certifications.map((cert) => (
-                <li key={cert} className="border-t border-border py-4 font-semibold">
-                  {cert}
+          <Reveal className="mt-10 border border-brand bg-brand-tint p-5 dark:bg-transparent">
+            <p className="label text-brand">Distinction</p>
+            <p className="t-h3 mt-2">{distinction}</p>
+          </Reveal>
+
+          <div className="mt-10">
+            <h3 className="label text-brand">Certifications</h3>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {certifications.map((c) => (
+                <li key={c.name} className="chip text-sm">
+                  {c.name}
                 </li>
               ))}
             </ul>

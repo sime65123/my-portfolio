@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Check, Copy } from "lucide-react"
+import { Reveal } from "@/components/reveal"
 import { portfolioData } from "@/lib/portfolio-data"
 
 type Status = "idle" | "sending" | "success" | "error"
@@ -53,85 +54,89 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="bg-finale py-24 text-[#eaf0e6] lg:py-32" style={{ ["--btn-shadow" as string]: "#eaf0e6" }}>
+    <section id="contact" className="section bg-surface">
       <div className="wrap">
-        <h2 className="t-h2 text-signal">Parlons de votre projet</h2>
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-5">
+            <p className="label text-brand">Contact</p>
+            <Reveal as="h2" variant="mask" className="t-h2 mt-3">
+              Parlons de votre projet
+            </Reveal>
+            <p className="mt-4 max-w-[28rem] text-ink-soft">
+              Un besoin, une idée, une collaboration ? Décrivez-moi le contexte, je réponds par e-mail.
+            </p>
 
-        <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <a
-            href={`mailto:${personal.email}`}
-            className="u-link break-all text-[clamp(1.5rem,4.2vw,3.5rem)] font-extrabold leading-tight tracking-tight"
-            style={{ fontStretch: "88%" }}
-          >
-            {personal.email}
-          </a>
-          <button
-            type="button"
-            onClick={copyEmail}
-            className="inline-flex items-center gap-2 border-2 border-[#eaf0e6]/40 px-3 py-2 text-sm font-semibold transition-colors hover:border-signal hover:text-signal"
-          >
-            {copied ? <Check className="size-4" aria-hidden /> : <Copy className="size-4" aria-hidden />}
-            <span aria-live="polite">{copied ? "Adresse copiée" : "Copier l’adresse"}</span>
-          </button>
-        </div>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a href={`mailto:${personal.email}`} className="u-link break-all font-display text-lg font-semibold">
+                {personal.email}
+              </a>
+              <button type="button" onClick={copyEmail} className="btn btn-outline min-h-0 px-3 py-1.5">
+                {copied ? <Check className="size-4" aria-hidden /> : <Copy className="size-4" aria-hidden />}
+                <span aria-live="polite">{copied ? "Adresse copiée" : "Copier l’adresse"}</span>
+              </button>
+            </div>
 
-        <div className="mt-20 grid gap-16 lg:grid-cols-12 lg:gap-12">
-          <dl className="space-y-6 lg:col-span-4">
-            <div>
-              <dt className="text-sm text-[#eaf0e6]/60">Téléphone</dt>
-              <dd className="mt-1 text-lg font-semibold">
-                <a href={`tel:${personal.phone.replace(/\s/g, "")}`} className="u-link">
-                  {personal.phone}
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt className="text-sm text-[#eaf0e6]/60">Localisation</dt>
-              <dd className="mt-1 text-lg font-semibold">{personal.location}</dd>
-            </div>
-            <div>
-              <dt className="text-sm text-[#eaf0e6]/60">En ligne</dt>
-              <dd className="mt-1 flex flex-wrap gap-x-6 gap-y-1 text-lg font-semibold">
-                <a href={personal.social.github} target="_blank" rel="noopener noreferrer" className="u-link">
-                  GitHub
-                </a>
-                <a href={personal.social.linkedin} target="_blank" rel="noopener noreferrer" className="u-link">
-                  LinkedIn
-                </a>
-                <a href={personal.resume} download className="u-link">
-                  CV
-                </a>
-              </dd>
-            </div>
-          </dl>
-
-          <form onSubmit={onSubmit} className="space-y-8 lg:col-span-8" aria-describedby="form-status">
-            <div className="grid gap-8 sm:grid-cols-2">
+            <dl className="mt-8 space-y-5 border-t border-line pt-6">
               <div>
-                <label htmlFor="name" className="text-sm font-semibold">
+                <dt className="label text-ink-faint">Téléphone</dt>
+                <dd className="mt-1">
+                  <a href={`tel:${personal.phone.replace(/\s/g, "")}`} className="u-link">
+                    {personal.phone}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="label text-ink-faint">Localisation</dt>
+                <dd className="mt-1">{personal.location}</dd>
+              </div>
+              <div>
+                <dt className="label text-ink-faint">En ligne</dt>
+                <dd className="mt-1 flex flex-wrap gap-x-5">
+                  <a href={personal.social.github} target="_blank" rel="noopener noreferrer" className="u-link">
+                    GitHub
+                  </a>
+                  <a href={personal.social.linkedin} target="_blank" rel="noopener noreferrer" className="u-link">
+                    LinkedIn
+                  </a>
+                  <a href={personal.resume} download className="u-link">
+                    CV
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <form
+            onSubmit={onSubmit}
+            className="space-y-6 border border-line bg-surface-low p-6 sm:p-8 lg:col-span-7"
+            aria-describedby="form-status"
+          >
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div>
+                <label htmlFor="name" className="label text-ink-soft">
                   Nom
                 </label>
-                <input id="name" name="name" type="text" required autoComplete="name" className="field" />
+                <input id="name" name="name" type="text" required autoComplete="name" className="field mt-2" />
               </div>
               <div>
-                <label htmlFor="email" className="text-sm font-semibold">
+                <label htmlFor="email" className="label text-ink-soft">
                   Adresse e-mail
                 </label>
-                <input id="email" name="email" type="email" required autoComplete="email" className="field" />
+                <input id="email" name="email" type="email" required autoComplete="email" className="field mt-2" />
               </div>
             </div>
 
             <div>
-              <label htmlFor="message" className="text-sm font-semibold">
+              <label htmlFor="message" className="label text-ink-soft">
                 Votre projet
               </label>
               <textarea
                 id="message"
                 name="message"
                 required
-                rows={5}
+                rows={6}
                 placeholder="Le besoin, le contexte, le délai souhaité…"
-                className="field resize-y"
+                className="field mt-2 resize-y"
               />
             </div>
 
@@ -139,16 +144,14 @@ export function ContactSection() {
             <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
 
             <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-              <button type="submit" disabled={status === "sending"} className="btn-signal">
+              <button type="submit" disabled={status === "sending"} className="btn btn-primary">
                 {status === "sending" ? "Envoi en cours" : "Envoyer le message"}
               </button>
 
-              <p id="form-status" role="status" className="text-sm font-semibold">
-                {status === "success" && (
-                  <span className="text-signal">Message envoyé. Je vous réponds par e-mail.</span>
-                )}
+              <p id="form-status" role="status" className="text-sm">
+                {status === "success" && <span className="font-semibold text-brand">Message envoyé. Je vous réponds par e-mail.</span>}
                 {status === "error" && (
-                  <span>
+                  <span className="text-danger">
                     Le message n’a pas pu partir. Écrivez-moi directement à{" "}
                     <a href={`mailto:${personal.email}`} className="u-link">
                       {personal.email}

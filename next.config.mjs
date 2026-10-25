@@ -13,7 +13,7 @@ const nextConfig = {
   // (partagées sur le CV, LinkedIn, etc.) pointent vers la bonne section.
   async redirects() {
     return [
-      { source: "/about", destination: "/#profil", permanent: true },
+      { source: "/about", destination: "/#a-propos", permanent: true },
       { source: "/education", destination: "/#parcours", permanent: true },
       { source: "/skills", destination: "/#competences", permanent: true },
       { source: "/projects", destination: "/#projets", permanent: true },

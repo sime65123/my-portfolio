@@ -7,12 +7,13 @@ export default function NotFound() {
     <>
       <Navigation />
       <main className="wrap flex min-h-[80svh] flex-col justify-center py-32">
-        <h1 className="t-h2">Page introuvable</h1>
-        <p className="t-lead mt-6 max-w-[32rem]">
+        <p className="label text-brand">Erreur 404</p>
+        <h1 className="t-display mt-3">Page introuvable</h1>
+        <p className="t-lead mt-6 max-w-[32rem] text-ink-soft">
           Cette adresse ne correspond à aucune page. Le projet a peut-être été renommé ou retiré.
         </p>
         <div className="mt-10">
-          <Link href="/#projets" className="btn-signal">
+          <Link href="/#projets" className="btn btn-primary">
             Voir les projets
           </Link>
         </div>

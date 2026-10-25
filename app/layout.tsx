@@ -1,25 +1,16 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import localFont from "next/font/local"
-import { Analytics } from "@vercel/analytics/next"
+import "@fontsource-variable/syne"
+import "@fontsource-variable/newsreader"
+import "@fontsource-variable/newsreader/wght-italic.css"
+import "@fontsource-variable/jetbrains-mono"
 import { ThemeProvider } from "@/components/theme-provider"
 import { portfolioData } from "@/lib/portfolio-data"
 import "./globals.css"
 
-// Archivo variable (poids 100–900, largeur 62–125 %), auto-hébergée :
-// aucune requête externe, donc rapide même sur une connexion lente.
-const archivo = localFont({
-  src: "./fonts/archivo-variable.woff2",
-  variable: "--font-archivo",
-  weight: "100 900",
-  style: "normal",
-  display: "swap",
-  declarations: [{ prop: "font-stretch", value: "62% 125%" }],
-})
-
 const { personal } = portfolioData
 
-const title = `${personal.displayName} | Développeur full-stack et data`
+const title = `${personal.displayName} | ${personal.title}`
 
 export const metadata: Metadata = {
   title: {
@@ -29,7 +20,7 @@ export const metadata: Metadata = {
   description: personal.bio,
   keywords: [
     "développeur full-stack",
-    "data",
+    "data scientist",
     "Next.js",
     "Django",
     "Flutter",
@@ -61,8 +52,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#e4e6e0" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a1a13" },
+    { media: "(prefers-color-scheme: light)", color: "#faf9f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1411" },
   ],
 }
 
@@ -81,7 +72,7 @@ const jsonLd = {
   sameAs: [personal.social.github, personal.social.linkedin],
 }
 
-// Évite de rejouer l'ouverture (barrière) à chaque visite de la même session.
+// Évite de rejouer l'ouverture à chaque visite de la même session.
 const introScript = `try{if(sessionStorage.getItem("intro")==="1")document.documentElement.classList.add("intro-skip")}catch(e){}`
 
 export default function RootLayout({
@@ -92,15 +83,16 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" />
         <script dangerouslySetInnerHTML={{ __html: introScript }} />
+        <noscript>
+          <style>{`[data-rv]{opacity:1!important;transform:none!important;clip-path:none!important}.rise,.photo-reveal{animation:none!important;opacity:1!important;transform:none!important;clip-path:none!important}#intro{display:none!important}`}</style>
+        </noscript>
       </head>
-      <body className={`${archivo.variable} font-sans antialiased`}>
+      <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <Analytics />
       </body>
     </html>
   )
