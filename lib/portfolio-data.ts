@@ -123,6 +123,7 @@ export const portfolioData = {
         "Une interface web de suivi",
       ],
       stack: ["Django", "Next.js", "Arduino", "ESP32", "Tailwind CSS"],
+      image: "/washwallet.png",
       cover: "navy",
       links: [
         { label: "VirtualWallet", href: "https://github.com/sime65123/VirtualWallet", kind: "code" },
@@ -179,6 +180,7 @@ export const portfolioData = {
         "Sécurité des données par règles RLS Supabase, et envoi d’images fiabilisé",
       ],
       stack: ["Flutter", "Riverpod", "GoRouter", "Supabase", "CinetPay"],
+      image: "/camerimmo.png",
       cover: "green",
       links: [],
       nodes: [
@@ -244,6 +246,7 @@ export const portfolioData = {
         "Une version bilingue français/anglais, en cours",
       ],
       stack: ["HTML", "CSS", "JavaScript", "FormSubmit"],
+      image: "/gymzone.png",
       cover: "green",
       links: [{ label: "Voir le site", href: "https://ktisgroupsarl.netlify.app/", kind: "demo" }],
     },

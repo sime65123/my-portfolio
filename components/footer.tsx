@@ -88,7 +88,7 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {personal.name}
           </p>
-          <p>Conçu et développé à Yaoundé</p>
+          <p>Tout droit reservé</p>
         </div>
       </div>
     </footer>
