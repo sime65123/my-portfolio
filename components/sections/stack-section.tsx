@@ -11,13 +11,12 @@ export function StackSection() {
           <div className="lg:col-span-5">
             <p className="label text-mint">Compétences</p>
             <Reveal as="h2" variant="mask" className="t-h2 mt-3 text-[#f2f5fb]">
-              Du capteur à l’écran
+              Mes outils au quotidien
             </Reveal>
           </div>
           <Reveal className="lg:col-span-6 lg:col-start-7 lg:self-end">
             <p>
-              Mes outils suivent le chemin d’une donnée : captée sur le terrain, traitée par un serveur, analysée,
-              puis affichée à l’utilisateur.
+              De l’interface à la base de données, les technologies que j’utilise pour construire une application complète.
             </p>
           </Reveal>
         </div>

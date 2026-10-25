@@ -2,27 +2,23 @@
 
 import * as React from "react"
 
-const nodes = ["Terrain", "Serveur", "Données", "Écran"]
+const nodes = ["Besoin", "Conception", "Code", "Livraison"]
 
 /**
- * Ouverture du site : la chaîne « du capteur à l'écran » se met en route,
+ * Ouverture du site : les quatre étapes d'un projet (besoin, conception, code, livraison) s'allument,
  * nœud après nœud, puis le rideau s'ouvre en deux.
  * L'animation est en CSS (voir globals.css) pour démarrer sans attendre React.
- * Ce composant retire le calque à la fin et mémorise que l'ouverture a été vue.
+ * Ce composant retire le calque à la fin. Elle se joue à chaque chargement de l'accueil.
  */
 export function IntroGate() {
   const [done, setDone] = React.useState(false)
 
   React.useEffect(() => {
-    const root = document.documentElement
-    if (root.classList.contains("intro-skip") || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setDone(true)
       return
     }
     const timer = window.setTimeout(() => {
-      try {
-        sessionStorage.setItem("intro", "1")
-      } catch {}
       setDone(true)
     }, 2850)
     return () => window.clearTimeout(timer)
@@ -68,13 +64,13 @@ export function IntroGate() {
 
           <div className="mt-16 space-y-1 font-mono text-[0.8125rem] leading-6 text-[#c3cde0]">
             <p className="intro-log" style={{ "--ld": "0.7s" } as React.CSSProperties}>
-              › Ticket présenté
+              › Analyse du besoin
             </p>
             <p className="intro-log" style={{ "--ld": "1.1s" } as React.CSSProperties}>
-              › Vérification par le serveur local
+              › Conception et développement
             </p>
             <p className="intro-log text-[#b0f1cd]" style={{ "--ld": "1.5s" } as React.CSSProperties}>
-              › Accès accordé
+              › Prêt, bienvenue
             </p>
           </div>
         </div>

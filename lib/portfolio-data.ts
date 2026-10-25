@@ -69,7 +69,7 @@ export const portfolioData = {
     // Texte d'accroche : il parle de Sime, pas de ses projets.
     bio: "Développeur web/mobile et data scientist, je crée des applications innovantes et des modèles prédictifs qui transforment les données en valeur ajoutée.",
     bioMore:
-      "Basé à Yaoundé, je réponds à des besoins concrets : contrôle d’accès, paiement Mobile Money, immobilier, sites d’entreprise.",
+      "Basé à Yaoundé, je conçois des applications web et mobiles, des API et des outils d’analyse de données, du premier prototype à la mise en ligne.",
     email: "simembacob@gmail.com",
     phone: "+237 6 50 19 26 42",
     location: "Yaoundé, Cameroun",
@@ -85,20 +85,20 @@ export const portfolioData = {
     facts: [
       { label: "Basé à", value: "Yaoundé, Cameroun" },
       { label: "En ce moment", value: "Master 2 CASI", note: "Université de Siantou" },
-      { label: "Domaines", value: "Web, mobile, embarqué, data" },
+      { label: "Domaines", value: "Web, mobile, data, objets connectés" },
       { label: "Langues", value: "Français, anglais" },
     ],
   },
 
   about: {
     paragraphs: [
-      "Mes projets partent presque toujours d’un besoin local : automatiser le paiement et l’accès à une station de lavage, publier et louer un logement depuis son téléphone, donner à une entreprise d’import-export un site à son image. Je travaille sur toute la chaîne, du capteur au serveur, de l’écran aux données.",
-      "Je me forme aujourd’hui plus en profondeur à la data et à l’IA, pour relier mes applications à leurs données : nettoyage, analyse et modèles prédictifs.",
+      "Je conçois et développe des applications web et mobiles, de l’interface à l’API et à la base de données. J’aime partir d’un besoin réel, bien le comprendre, puis livrer quelque chose de simple à utiliser et facile à faire évoluer.",
+      "Je me forme aujourd’hui plus en profondeur à la data et à l’IA, pour que mes applications s’appuient sur leurs données : nettoyage, analyse et modèles prédictifs.",
     ],
     focus: [
-      { title: "Contrôle d’accès connecté", text: "Paiement et accès physique à un portique.", project: "wash-wallet" },
-      { title: "Applications mobiles", text: "Immobilier et paiement Mobile Money.", project: "camerimmo" },
-      { title: "Sites et plateformes web", text: "Vitrines d’entreprise, gestion, e-commerce.", project: "ktis-group" },
+      { title: "Sites et applications web", text: "Vitrines d’entreprise, outils de gestion, e-commerce.", project: "gymzone" },
+      { title: "Applications mobiles", text: "Des applications Flutter avec un back-end Supabase.", project: "camerimmo" },
+      { title: "Objets connectés", text: "Un module Arduino ou ESP32 relié à une application web.", project: "wash-wallet" },
     ],
   },
 
@@ -277,32 +277,32 @@ export const portfolioData = {
 
   stack: [
     {
-      id: "terrain",
-      kicker: "Capteurs",
-      name: "Terrain",
-      note: "Des modules d’accès qui commandent un portique et signalent leur état.",
-      tools: ["Arduino", "ESP32"],
+      id: "interface",
+      kicker: "Front-end",
+      name: "Interfaces",
+      note: "Des interfaces web et mobiles soignées, maquettées sur Figma.",
+      tools: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "Flutter", "Figma"],
     },
     {
       id: "serveur",
-      kicker: "Logique",
-      name: "Serveur",
-      note: "Des API et des bases de données, avec le paiement Mobile Money branché.",
-      tools: ["Django", "Laravel", "Supabase", "MySQL", "SQLite", "Postman", "CinetPay"],
+      kicker: "Back-end",
+      name: "Serveur et API",
+      note: "Des API REST sécurisées, avec authentification et services tiers.",
+      tools: ["Django", "Laravel", "Supabase", "Postman", "JWT", "OAuth"],
     },
     {
       id: "donnees",
-      kicker: "Analyse",
-      name: "Données",
-      note: "Nettoyer, analyser et automatiser le traitement des données.",
-      tools: ["Python", "SQL", "Airflow", "Excel"],
+      kicker: "Données",
+      name: "Bases et analyse",
+      note: "Stocker, nettoyer, analyser et automatiser le traitement des données.",
+      tools: ["MySQL", "SQLite", "SQL", "Python", "Airflow", "Excel"],
     },
     {
-      id: "ecran",
-      kicker: "Interface",
-      name: "Écran",
-      note: "Des interfaces web et des applications mobiles, maquettées sur Figma.",
-      tools: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "Flutter", "Figma"],
+      id: "embarque",
+      kicker: "Embarqué",
+      name: "Objets connectés",
+      note: "Des modules qui commandent un équipement et communiquent avec une application.",
+      tools: ["Arduino", "ESP32"],
     },
   ] as StackStage[],
 
@@ -322,23 +322,23 @@ export const portfolioData = {
     {
       id: "mobile",
       title: "Applications mobiles",
-      description: "Des applications Flutter connectées à un back-end Supabase, avec paiement Mobile Money.",
+      description: "Des applications Flutter connectées à un back-end, pour Android et iOS.",
       features: [
         "Applications Flutter avec Riverpod",
         "Authentification, base de données et stockage Supabase",
-        "Paiement MTN MoMo et Orange Money via CinetPay",
+        "Intégration de la solution de paiement adaptée au besoin (Mobile Money, passerelles en ligne)",
         "Messagerie, notifications et gestion de documents",
       ],
     },
     {
       id: "embarque",
-      title: "Objets connectés et contrôle d’accès",
+      title: "Objets connectés",
       description: "Relier un module Arduino ou ESP32 à une application web pour piloter un équipement réel.",
       features: [
-        "Modules d’accès sur Arduino et ESP32",
+        "Programmation de modules Arduino et ESP32",
+        "Communication avec un serveur ou une application web",
         "Suivi de l’état de connexion des équipements",
-        "Vérification de tickets et gestion des accès",
-        "Rapports d’activité",
+        "Contrôle d’accès, comme sur le projet Wash Wallet",
       ],
     },
     {

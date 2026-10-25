@@ -12,7 +12,7 @@ export function AboutSection() {
         <div className="lg:col-span-4">
           <p className="label text-brand">À propos</p>
           <Reveal as="h2" variant="mask" className="t-h2 mt-3">
-            Je construis de la donnée au capteur
+            Du besoin à l’application en ligne
           </Reveal>
         </div>
 

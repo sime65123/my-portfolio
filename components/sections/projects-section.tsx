@@ -24,7 +24,7 @@ export function ProjectsSection() {
           </div>
           <Reveal className="lg:col-span-6 lg:col-start-6 lg:self-end">
             <p className="text-ink-soft">
-              Cinq réalisations, du portique connecté à la boutique en ligne. Chacune a sa page : contexte, ce qui a
+              Cinq réalisations : applications web et mobile, site d’entreprise, e-commerce et objet connecté. Chacune a sa page : contexte, ce qui a
               été construit, outils utilisés.
             </p>
           </Reveal>

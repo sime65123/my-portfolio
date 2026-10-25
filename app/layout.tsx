@@ -72,8 +72,6 @@ const jsonLd = {
   sameAs: [personal.social.github, personal.social.linkedin],
 }
 
-// Évite de rejouer l'ouverture à chaque visite de la même session.
-const introScript = `try{if(sessionStorage.getItem("intro")==="1")document.documentElement.classList.add("intro-skip")}catch(e){}`
 
 export default function RootLayout({
   children,
@@ -83,7 +81,6 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: introScript }} />
         <noscript>
           <style>{`[data-rv]{opacity:1!important;transform:none!important;clip-path:none!important}.rise,.photo-reveal{animation:none!important;opacity:1!important;transform:none!important;clip-path:none!important}#intro{display:none!important}`}</style>
         </noscript>
