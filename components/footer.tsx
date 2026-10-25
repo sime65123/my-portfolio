@@ -88,7 +88,7 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {personal.name}
           </p>
-          <p>Tout droit reservé</p>
+          <p>Tous droits réservés</p>
         </div>
       </div>
     </footer>

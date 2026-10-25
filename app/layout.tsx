@@ -1,3 +1,4 @@
+import { Assistant } from "@/components/assistant"
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import "@fontsource-variable/syne"
@@ -88,6 +89,7 @@ export default function RootLayout({
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
+          <Assistant />
         </ThemeProvider>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>

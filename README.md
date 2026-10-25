@@ -48,3 +48,12 @@ Le formulaire envoie un e-mail via [FormSubmit](https://formsubmit.co). **À la 
 ## Déploiement
 
 Connectez le dépôt à Vercel : Next.js est détecté automatiquement.
+
+## Assistant du portfolio
+
+Un bouton « Poser une question » (en bas à droite) ouvre un assistant qui répond aux visiteurs à propos de Sime. Ses connaissances viennent uniquement de `lib/portfolio-data.ts` : modifier ce fichier met l'assistant à jour.
+
+- **Sans configuration** : il répond avec les informations du site (mode local, gratuit).
+- **Avec une clé d'API** : il répond en langage libre. Copie `.env.example` en `.env.local` pour tester, et déclare les mêmes variables chez l'hébergeur (jamais dans le code). `ANTHROPIC_API_KEY` active Claude ; `CHAT_API_KEY` active une API compatible OpenAI (Groq, OpenRouter, Gemini).
+
+La route `app/api/chat/route.ts` est un code serveur : l'hébergeur doit donc exécuter Next.js (un export 100 % statique ne l'inclurait pas).
