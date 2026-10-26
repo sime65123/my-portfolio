@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ArrowUp, X } from "lucide-react"
+import { ArrowUp, MessageCircle, X } from "lucide-react"
 
 type Msg = { role: "user" | "assistant"; content: string }
 
@@ -127,10 +127,16 @@ export function Assistant() {
           type="button"
           onClick={() => setOpen(true)}
           aria-haspopup="dialog"
-          className="assistant-in fixed bottom-4 right-4 z-40 flex items-center gap-2.5 border border-navy-line bg-navy px-4 py-3 text-[#f2f5fb] shadow-lg transition-colors hover:bg-brand sm:bottom-6 sm:right-6"
+          aria-label="Poser une question"
+          className="assistant-in group fixed bottom-4 right-4 z-40 flex h-12 items-center border border-navy-line bg-navy pl-[0.8125rem] pr-[0.8125rem] text-[#f2f5fb] shadow-lg transition-[background-color,padding] duration-300 hover:bg-brand hover:pr-4 focus-visible:bg-brand focus-visible:pr-4 sm:bottom-6 sm:right-6"
         >
-          <span aria-hidden className="pulse-dot !bg-mint after:!bg-mint" />
-          <span className="label">Poser une question</span>
+          <MessageCircle className="size-[1.375rem] shrink-0" aria-hidden />
+          <span
+            aria-hidden
+            className="label max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity,margin] duration-300 group-hover:ml-2.5 group-hover:max-w-[12rem] group-hover:opacity-100 group-focus-visible:ml-2.5 group-focus-visible:max-w-[12rem] group-focus-visible:opacity-100 motion-reduce:transition-none"
+          >
+            Poser une question
+          </span>
         </button>
       )}
 
